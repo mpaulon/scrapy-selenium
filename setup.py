@@ -9,11 +9,11 @@ setuptools.setup(
     description="SCrapy with selenium",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/mpaulon/scrapy-selenium"
+    url="https://github.com/mpaulon/scrapy-selenium",
     packages=setuptools.find_packages(),
     install_requires=[
         "scrapy>=1.0.0",
         "selenium>=3.9.0",
-    ]
+    ],
     python_requires='>=3.6',
 )
