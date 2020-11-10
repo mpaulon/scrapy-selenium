@@ -121,6 +121,10 @@ class SeleniumMiddleware:
         if request.script:
             self.driver.execute_script(request.script)
 
+        if request.element_to_click:
+            element = self.driver.find_element(request.element_to_click[0], request.element_to_click[1])
+            element.click()
+
         body = str.encode(self.driver.page_source)
 
         # Expose the driver via the "meta" attribute
