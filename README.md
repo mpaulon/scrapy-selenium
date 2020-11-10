@@ -17,7 +17,8 @@ You will also need one of the Selenium [compatible browsers](http://www.selenium
 
     SELENIUM_DRIVER_NAME = 'firefox'
     SELENIUM_DRIVER_EXECUTABLE_PATH = which('geckodriver')
-    SELENIUM_DRIVER_ARGUMENTS=['-headless']  # '--headless' if using chrome instead of firefox
+    SELENIUM_DRIVER_ARGUMENTS=['--headless']
+    SELENIUM_FIREFOX_PROFILE_PATH= "<profile path" # path to a firefox profile, ignored when SELENIUM_DRIVER_NAME is not firefox
     ```
 
 Optionally, set the path to the browser executable:
@@ -57,7 +58,7 @@ def parse_result(self, response):
 ```
 
 ### Additional arguments
-The `scrapy_selenium.SeleniumRequest` accept 4 additional arguments:
+The `scrapy_selenium.SeleniumRequest` accept 5 additional arguments:
 
 #### `wait_time` / `wait_until`
 
@@ -97,3 +98,16 @@ yield SeleniumRequest(
     script='window.scrollTo(0, document.body.scrollHeight);',
 )
 ```
+#### `element_to_click`
+When used, selenium will click on the selected element.
+```python
+from selenium.webdriver.common.by import By
+
+yield SeleniumRequest(
+    url=url,
+    callback=self.parse_result,
+    element_to_click=(By.ID, 'someid')
+)
+```
+
+
