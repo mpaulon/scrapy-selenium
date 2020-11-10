@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="scrapy-selenium",
-    version="0.0.8",
+    version="0.0.8a",
     description="SCrapy with selenium",
     long_description=long_description,
     long_description_content_type="text/markdown",

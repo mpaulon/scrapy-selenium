@@ -1,5 +1,7 @@
 """This module contains the ``SeleniumMiddleware`` scrapy middleware"""
 
+import selenium
+
 from importlib import import_module
 
 from scrapy import signals
