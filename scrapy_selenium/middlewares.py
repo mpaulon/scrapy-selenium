@@ -123,6 +123,8 @@ class SeleniumMiddleware:
             WebDriverWait(self.driver, request.wait_time).until(
                 request.wait_until
             )
+        elif request.wait_time:
+            time.sleep(request.wait_time)
 
         if request.screenshot:
             request.meta['screenshot'] = self.driver.get_screenshot_as_png()
@@ -150,4 +152,3 @@ class SeleniumMiddleware:
         """Shutdown the driver when spider is closed"""
 
         self.driver.quit()
-
