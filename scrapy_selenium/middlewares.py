@@ -1,4 +1,5 @@
 """This module contains the ``SeleniumMiddleware`` scrapy middleware"""
+import time
 
 import selenium
 
