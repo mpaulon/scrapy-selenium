@@ -7,7 +7,7 @@ Scrapy middleware to handle javascript pages using selenium.
 ```
 $ pip install scrapy-selenium
 ```
-You should use **python>=3.6**. 
+You should use **python>=3.6**.
 You will also need one of the Selenium [compatible browsers](http://www.seleniumhq.org/about/platforms.jsp).
 
 ## Configuration
@@ -18,7 +18,8 @@ You will also need one of the Selenium [compatible browsers](http://www.selenium
     SELENIUM_DRIVER_NAME = 'firefox'
     SELENIUM_DRIVER_EXECUTABLE_PATH = which('geckodriver')
     SELENIUM_DRIVER_ARGUMENTS=['--headless']
-    SELENIUM_FIREFOX_PROFILE_PATH= "<profile path" # path to a firefox profile, ignored when SELENIUM_DRIVER_NAME is not firefox
+    SELENIUM_FIREFOX_PROFILE_PATH= "<profile path>" # path to a firefox profile, ignored when SELENIUM_DRIVER_NAME is not firefox
+    SELENIUM_PAGE_LOAD_TIMEOUT=60
     ```
 
 Optionally, set the path to the browser executable:
@@ -109,5 +110,3 @@ yield SeleniumRequest(
     element_to_click=(By.ID, 'someid')
 )
 ```
-
-

@@ -17,7 +17,8 @@ class SeleniumMiddleware:
     """Scrapy middleware handling the requests using selenium"""
 
     def __init__(self, driver_name, driver_executable_path,
-        browser_executable_path, command_executor, driver_arguments, firefox_profile_path):
+        browser_executable_path, command_executor, driver_arguments,
+        firefox_profile_path, page_load_timeout):
         """Initialize the selenium webdriver
 
         Parameters
@@ -34,6 +35,8 @@ class SeleniumMiddleware:
             Selenium remote server endpoint
         firefox_profile_path: str
             Firefox profile path
+        page_load_timeout: int
+            Number of seconds to wait for a page to load before throwing an error
         """
 
         webdriver_base_path = f'selenium.webdriver.{driver_name}'
@@ -73,6 +76,9 @@ class SeleniumMiddleware:
             self.driver = webdriver.Remote(command_executor=command_executor,
                                            desired_capabilities=capabilities)
 
+        if page_load_timeout:
+            self.driver.set_page_load_timeout(page_load_timeout)
+
     @classmethod
     def from_crawler(cls, crawler):
         """Initialize the middleware with the crawler settings"""
@@ -83,6 +89,7 @@ class SeleniumMiddleware:
         command_executor = crawler.settings.get('SELENIUM_COMMAND_EXECUTOR')
         driver_arguments = crawler.settings.get('SELENIUM_DRIVER_ARGUMENTS')
         firefox_profile_path  = crawler.settings.get('SELENIUM_FIREFOX_PROFILE_PATH')
+        page_load_timeout = crawler.settings.get('SELENIUM_PAGE_LOAD_TIMEOUT')
 
         if driver_name is None:
             raise NotConfigured('SELENIUM_DRIVER_NAME must be set')
@@ -98,6 +105,7 @@ class SeleniumMiddleware:
             command_executor=command_executor,
             driver_arguments=driver_arguments,
             firefox_profile_path=firefox_profile_path,
+            page_load_timeout=page_load_timeout,
         )
 
         crawler.signals.connect(middleware.spider_closed, signals.spider_closed)
